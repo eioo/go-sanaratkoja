@@ -41,14 +41,14 @@ func loadWords(filename string) []string {
 	return words
 }
 
-func isSubset(of, arr []string) bool {
+func isSubset(of, arr *[]string) bool {
 	set := make(map[string]int)
 
-	for _, value := range of {
+	for _, value := range *of {
 		set[value] += 1
 	}
 
-	for _, value := range arr {
+	for _, value := range *arr {
 		if count, found := set[value]; !found {
 			return false
 		} else if count < 1 {
@@ -122,7 +122,7 @@ func findWords(board *Board, words *[]string) []string {
 			chars = append(chars, string(c))
 		}
 
-		if !isSubset(allChars, chars) {
+		if !isSubset(&allChars, &chars) {
 			continue
 		}
 
