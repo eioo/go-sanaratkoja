@@ -143,8 +143,9 @@ func findWords(board *Board, words *[]string) []string {
 					skip := false
 
 					for _, traversedPos := range traversedPositions {
-						if neighbour.x == traversedPos.x && neighbour.y == traversedPos.y {
+						if neighbour == traversedPos {
 							skip = true
+							break
 						}
 					}
 
@@ -190,7 +191,8 @@ func main() {
 
 	start := time.Now()
 	foundWords := findWords(&board, &words)
+	delta := time.Since(start)
 
 	fmt.Println(strings.Join(foundWords, "\n"))
-	fmt.Println("\nTook:", time.Since(start))
+	fmt.Printf("\nFound words: %v\nTook: %v", len(foundWords), delta)
 }
